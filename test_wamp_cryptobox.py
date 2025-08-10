@@ -24,58 +24,14 @@
 #
 ###############################################################################
 
-from autobahn.wamp.types import \
-    ComponentConfig, \
-    SessionDetails, \
-    CloseDetails, \
-    RegisterOptions, \
-    CallOptions, \
-    CallDetails, \
-    CallResult, \
-    SubscribeOptions, \
-    PublishOptions, \
-    EventDetails
+from autobahn.wamp import cryptobox
 
-from autobahn.wamp.exception import \
-    Error, \
-    SessionNotReady, \
-    SerializationError, \
-    ProtocolError, \
-    TransportLost, \
-    ApplicationError, \
-    InvalidUri
-
-from autobahn.wamp.interfaces import ISession
-
-from autobahn.wamp.uri import \
-    error, \
-    register, \
-    subscribe
+import unittest
 
 
-__all__ = (
-    'ComponentConfig',
-    'SessionDetails',
-    'CloseDetails',
-    'RegisterOptions',
-    'CallOptions',
-    'CallDetails',
-    'CallResult',
-    'SubscribeOptions',
-    'PublishOptions',
-    'EventDetails',
+@unittest.skipIf(not cryptobox.HAS_CRYPTOBOX, 'no cryptobox support present')
+class TestCryptoBox(unittest.TestCase):
 
-    'Error',
-    'SessionNotReady',
-    'SerializationError',
-    'ProtocolError',
-    'TransportLost',
-    'ApplicationError',
-    'InvalidUri',
-
-    'ISession',
-
-    'error',
-    'register',
-    'subscribe',
-)
+    def test_create_keyring(self):
+        kr = cryptobox.KeyRing()
+        assert kr

@@ -24,58 +24,17 @@
 #
 ###############################################################################
 
-from autobahn.wamp.types import \
-    ComponentConfig, \
-    SessionDetails, \
-    CloseDetails, \
-    RegisterOptions, \
-    CallOptions, \
-    CallDetails, \
-    CallResult, \
-    SubscribeOptions, \
-    PublishOptions, \
-    EventDetails
+import os
 
-from autobahn.wamp.exception import \
-    Error, \
-    SessionNotReady, \
-    SerializationError, \
-    ProtocolError, \
-    TransportLost, \
-    ApplicationError, \
-    InvalidUri
+if os.environ.get('USE_TWISTED', False):
+    from twisted.trial import unittest
 
-from autobahn.wamp.interfaces import ISession
+    from autobahn.wamp.websocket import WampWebSocketProtocol
 
-from autobahn.wamp.uri import \
-    error, \
-    register, \
-    subscribe
+    class TestWebsocketProtocol(unittest.TestCase):
+        def setUp(self):
+            self.protocol = WampWebSocketProtocol()
 
-
-__all__ = (
-    'ComponentConfig',
-    'SessionDetails',
-    'CloseDetails',
-    'RegisterOptions',
-    'CallOptions',
-    'CallDetails',
-    'CallResult',
-    'SubscribeOptions',
-    'PublishOptions',
-    'EventDetails',
-
-    'Error',
-    'SessionNotReady',
-    'SerializationError',
-    'ProtocolError',
-    'TransportLost',
-    'ApplicationError',
-    'InvalidUri',
-
-    'ISession',
-
-    'error',
-    'register',
-    'subscribe',
-)
+        def test_close_before_open(self):
+            # just checking this doesn't throw an exception...
+            self.protocol.onClose(True, 1, "just testing")

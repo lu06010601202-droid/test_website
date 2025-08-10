@@ -24,58 +24,27 @@
 #
 ###############################################################################
 
-from autobahn.wamp.types import \
-    ComponentConfig, \
-    SessionDetails, \
-    CloseDetails, \
-    RegisterOptions, \
-    CallOptions, \
-    CallDetails, \
-    CallResult, \
-    SubscribeOptions, \
-    PublishOptions, \
-    EventDetails
+from unittest import TestCase
 
-from autobahn.wamp.exception import \
-    Error, \
-    SessionNotReady, \
-    SerializationError, \
-    ProtocolError, \
-    TransportLost, \
-    ApplicationError, \
-    InvalidUri
-
-from autobahn.wamp.interfaces import ISession
-
-from autobahn.wamp.uri import \
-    error, \
-    register, \
-    subscribe
+from autobahn.wamp.exception import ApplicationError
 
 
-__all__ = (
-    'ComponentConfig',
-    'SessionDetails',
-    'CloseDetails',
-    'RegisterOptions',
-    'CallOptions',
-    'CallDetails',
-    'CallResult',
-    'SubscribeOptions',
-    'PublishOptions',
-    'EventDetails',
+class ApplicationErrorTestCase(TestCase):
 
-    'Error',
-    'SessionNotReady',
-    'SerializationError',
-    'ProtocolError',
-    'TransportLost',
-    'ApplicationError',
-    'InvalidUri',
+    def test_unicode_str(self):
+        """
+        Unicode arguments in ApplicationError will not raise an exception when
+        str()'d.
+        """
+        error = ApplicationError("some.url", "\u2603")
+        self.assertIn("\u2603", str(error))
 
-    'ISession',
-
-    'error',
-    'register',
-    'subscribe',
-)
+    def test_unicode_errormessage(self):
+        """
+        Unicode arguments in ApplicationError will not raise an exception when
+        the error_message method is called.
+        """
+        error = ApplicationError("some.url", "\u2603")
+        # on py27-tw189: exceptions.UnicodeEncodeError: 'ascii' codec can't encode character '\u2603' in position 10: ordinal not in
+        print(error.error_message())
+        self.assertIn("\u2603", error.error_message())
