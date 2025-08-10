@@ -1,0 +1,57 @@
+{% extends 'community/base.html' %}
+
+{% block title %}标签列表 - 社区论坛{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h4 class="mb-0">
+                        <i class="fas fa-tags me-2"></i>标签列表
+                    </h4>
+                    {% if user.is_staff %}
+                    <a href="{% url 'create_tag' %}" class="btn btn-light btn-sm">
+                        <i class="fas fa-plus me-1"></i>创建标签
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="card-body">
+                {% if tags %}
+                <div class="row">
+                    {% for tag in tags %}
+                    <div class="col-md-4 col-lg-3 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <div class="mb-2">
+                                    <span class="badge" style="background-color: {{ tag.color }}; font-size: 1.2em;">
+                                        {{ tag.name }}
+                                    </span>
+                                </div>
+                                <p class="card-text small text-muted">{{ tag.description|truncatewords:10 }}</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <small class="text-muted">
+                                        <i class="fas fa-file-alt"></i> {{ tag.posts_count }} 篇帖子
+                                    </small>
+                                    <a href="{% url 'tag_posts' tag.pk %}" class="btn btn-outline-primary btn-sm">
+                                        <i class="fas fa-eye"></i> 查看
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <div class="text-center text-muted py-5">
+                    <i class="fas fa-tags fa-3x mb-3"></i>
+                    <p>暂无标签</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

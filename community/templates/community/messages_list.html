@@ -1,0 +1,101 @@
+{% extends 'community/base.html' %}
+
+{% block title %}私信 - 社区论坛{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-8 mx-auto">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h4 class="mb-0">
+                        <i class="fas fa-envelope me-2"></i>私信
+                    </h4>
+                    <a href="{% url 'send_message' %}" class="btn btn-light btn-sm">
+                        <i class="fas fa-plus me-1"></i>发送私信
+                    </a>
+                </div>
+            </div>
+            <div class="card-body">
+                <!-- 收到的私信 -->
+                <h5 class="mb-3">
+                    <i class="fas fa-inbox me-2"></i>收到的私信
+                </h5>
+                {% if received_messages %}
+                    {% for message in received_messages %}
+                    <div class="card mb-3 {% if not message.is_read %}border-primary{% endif %}">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div class="flex-grow-1">
+                                    <h6 class="card-title mb-1">
+                                        <a href="{% url 'message_detail' message.pk %}" class="text-decoration-none">
+                                            {{ message.subject }}
+                                            {% if not message.is_read %}
+                                            <span class="badge bg-primary ms-2">新</span>
+                                            {% endif %}
+                                        </a>
+                                    </h6>
+                                    <p class="card-text text-muted small mb-1">
+                                        <i class="fas fa-user me-1"></i>{{ message.sender.username }}
+                                    </p>
+                                    <p class="card-text small text-truncate">{{ message.content|truncatewords:20 }}</p>
+                                </div>
+                                <div class="text-end">
+                                    <small class="text-muted">{{ message.created_at|timesince }}前</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="text-center text-muted py-4">
+                        <i class="fas fa-inbox fa-3x mb-3"></i>
+                        <p>暂无收到的私信</p>
+                    </div>
+                {% endif %}
+
+                <hr class="my-4">
+
+                <!-- 发送的私信 -->
+                <h5 class="mb-3">
+                    <i class="fas fa-paper-plane me-2"></i>发送的私信
+                </h5>
+                {% if sent_messages %}
+                    {% for message in sent_messages %}
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div class="flex-grow-1">
+                                    <h6 class="card-title mb-1">
+                                        <a href="{% url 'message_detail' message.pk %}" class="text-decoration-none">
+                                            {{ message.subject }}
+                                        </a>
+                                    </h6>
+                                    <p class="card-text text-muted small mb-1">
+                                        <i class="fas fa-user me-1"></i>发送给 {{ message.recipient.username }}
+                                        {% if message.is_read %}
+                                        <span class="badge bg-success ms-2">已读</span>
+                                        {% else %}
+                                        <span class="badge bg-secondary ms-2">未读</span>
+                                        {% endif %}
+                                    </p>
+                                    <p class="card-text small text-truncate">{{ message.content|truncatewords:20 }}</p>
+                                </div>
+                                <div class="text-end">
+                                    <small class="text-muted">{{ message.created_at|timesince }}前</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="text-center text-muted py-4">
+                        <i class="fas fa-paper-plane fa-3x mb-3"></i>
+                        <p>暂无发送的私信</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

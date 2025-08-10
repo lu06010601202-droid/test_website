@@ -1,0 +1,91 @@
+{% extends 'community/base.html' %}
+
+{% block title %}{{ profile_user.username }} 的活动 - 社区论坛{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">
+                    <i class="fas fa-chart-line me-2"></i>{{ profile_user.username }} 的活动记录
+                </h4>
+            </div>
+            <div class="card-body">
+                {% if page_obj %}
+                <div class="list-group">
+                    {% for activity in page_obj %}
+                    <div class="list-group-item">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="flex-grow-1">
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-{% if activity.activity_type == 'post' %}file-alt text-primary{% elif activity.activity_type == 'comment' %}comment text-success{% elif activity.activity_type == 'like' %}heart text-danger{% elif activity.activity_type == 'follow' %}user-plus text-info{% elif activity.activity_type == 'unfollow' %}user-minus text-warning{% else %}circle text-secondary{% endif %} me-2"></i>
+                                    <div>
+                                        <strong>{{ profile_user.username }}</strong>
+                                        {% if activity.activity_type == 'post' %}
+                                        发布了帖子
+                                        {% elif activity.activity_type == 'comment' %}
+                                        发表了评论
+                                        {% elif activity.activity_type == 'like' %}
+                                        点赞了帖子
+                                        {% elif activity.activity_type == 'follow' %}
+                                        关注了用户
+                                        {% elif activity.activity_type == 'unfollow' %}
+                                        取消关注了用户
+                                        {% else %}
+                                        进行了活动
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            <small class="text-muted">{{ activity.created_at|timesince }}前</small>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                
+                <!-- 分页 -->
+                {% if page_obj.has_other_pages %}
+                <nav aria-label="分页" class="mt-4">
+                    <ul class="pagination justify-content-center">
+                        {% if page_obj.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.previous_page_number }}">
+                                <i class="fas fa-chevron-left"></i> 上一页
+                            </a>
+                        </li>
+                        {% endif %}
+
+                        {% for num in page_obj.paginator.page_range %}
+                            {% if page_obj.number == num %}
+                            <li class="page-item active">
+                                <span class="page-link">{{ num }}</span>
+                            </li>
+                            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                            </li>
+                            {% endif %}
+                        {% endfor %}
+
+                        {% if page_obj.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.next_page_number }}">
+                                下一页 <i class="fas fa-chevron-right"></i>
+                            </a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+                {% endif %}
+                {% else %}
+                <div class="text-center text-muted py-5">
+                    <i class="fas fa-chart-line fa-3x mb-3"></i>
+                    <p>暂无活动记录</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

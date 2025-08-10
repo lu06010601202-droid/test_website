@@ -1,0 +1,185 @@
+{% extends 'community/base.html' %}
+{% load static %}
+
+{% block title %}{{ post.title }} - 社区论坛{% endblock %}
+
+{% block extra_css %}
+<style>
+    body {
+        background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%), 
+                    url('{% static "images/微信图片_20250807183438_34.png" %}');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        min-height: 100vh;
+    }
+    
+    .post-detail-container {
+        max-width: 800px;
+        margin: 30px auto;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .post-header {
+        margin-bottom: 30px;
+        border-bottom: 2px solid #eee;
+        padding-bottom: 20px;
+    }
+    
+    .post-title {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 15px;
+        color: #333;
+    }
+    
+    .post-meta {
+        color: #6c757d;
+        font-size: 0.9rem;
+        margin-bottom: 20px;
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+    
+    .post-content {
+        line-height: 1.8;
+        font-size: 1.1rem;
+        margin-bottom: 30px;
+    }
+    
+    .comment-section {
+        margin-top: 40px;
+        border-top: 2px solid #eee;
+        padding-top: 30px;
+    }
+    
+    .comment {
+        padding: 20px;
+        border-bottom: 1px solid #eee;
+        background: rgba(248, 249, 250, 0.5);
+        border-radius: 10px;
+        margin-bottom: 15px;
+    }
+    
+    .comment-form {
+        margin-top: 30px;
+        background: rgba(248, 249, 250, 0.5);
+        padding: 20px;
+        border-radius: 10px;
+    }
+    
+    .comment-form textarea {
+        width: 100%;
+        padding: 15px;
+        border: 2px solid #e1e5e9;
+        border-radius: 8px;
+        font-size: 1rem;
+        resize: vertical;
+        min-height: 100px;
+    }
+    
+    .comment-form textarea:focus {
+        outline: none;
+        border-color: #667eea;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+    
+    .btn-primary {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border: none;
+        padding: 10px 20px;
+        border-radius: 8px;
+        color: white;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="post-detail-container">
+    <div class="post-header">
+        <h1 class="post-title">{{ post.title }}</h1>
+        <div class="post-meta">
+            <span><i class="fas fa-user"></i> 作者: {{ post.author.username }}</span>
+            <span><i class="fas fa-calendar"></i> {{ post.created_at|date:"Y-m-d H:i" }}</span>
+            <span><i class="fas fa-eye"></i> {{ post.views }} 次浏览</span>
+            <span><i class="fas fa-folder"></i> {{ post.category.name }}</span>
+        </div>
+    </div>
+    
+    <div class="post-content">
+        {{ post.content|safe }}
+    </div>
+    
+    <div class="comment-section">
+        <h3><i class="fas fa-comments"></i> 评论 ({{ post.comments.count }})</h3>
+        {% for comment in post.comments.all %}
+            <div class="comment">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <strong>{{ comment.author.username }}</strong>
+                    <small>{{ comment.created_at|date:"Y-m-d H:i" }}</small>
+                </div>
+                <p>{{ comment.content }}</p>
+            </div>
+        {% endfor %}
+        
+        {% if user.is_authenticated %}
+        <div class="comment-form">
+            <h4><i class="fas fa-edit"></i> 发表评论</h4>
+            <form method="post">
+                {% csrf_token %}
+                {{ comment_form.as_p }}
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-paper-plane"></i> 提交评论
+                </button>
+            </form>
+        </div>
+        {% else %}
+        <div class="comment-form" style="text-align: center; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; border-radius: 15px;">
+            <h4 style="margin-bottom: 15px;">
+                <i class="fas fa-lock"></i> 登录后参与讨论
+            </h4>
+            <p style="margin-bottom: 20px; opacity: 0.9;">
+                登录后你可以发表评论、点赞和参与更多互动
+            </p>
+            <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                <a href="{% url 'login' %}" style="
+                    background: rgba(255,255,255,0.2);
+                    color: white;
+                    padding: 10px 25px;
+                    border-radius: 25px;
+                    text-decoration: none;
+                    border: 1px solid rgba(255,255,255,0.3);
+                    transition: all 0.3s ease;
+                " onmouseover="this.style.background='rgba(255,255,255,0.3)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'">
+                    <i class="fas fa-sign-in-alt"></i> 登录
+                </a>
+                <a href="{% url 'register' %}" style="
+                    background: white;
+                    color: #667eea;
+                    padding: 10px 25px;
+                    border-radius: 25px;
+                    text-decoration: none;
+                    font-weight: 600;
+                    transition: all 0.3s ease;
+                " onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+                    <i class="fas fa-user-plus"></i> 注册
+                </a>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %} 

@@ -1,0 +1,364 @@
+{% extends 'community/base.html' %}
+{% load static %}
+
+{% block title %}社区论坛{% endblock %}
+
+{% block extra_css %}
+<style>
+    body {
+        background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%), 
+                    url('{% static "images/微信图片_20250807183438_32.png" %}');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        color: #333;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        min-height: 100vh;
+    }
+    
+    .navbar {
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .main-container {
+        max-width: 1200px;
+        margin: 30px auto;
+        display: grid;
+        grid-template-columns: 1fr 300px;
+        gap: 30px;
+    }
+    
+    .post-list {
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+        padding: 20px;
+    }
+    
+    .post-card {
+        padding: 20px;
+        border-bottom: 1px solid #eee;
+        transition: all 0.3s ease;
+        border-radius: 8px;
+        margin-bottom: 15px;
+    }
+    
+    .post-card:hover {
+        background-color: #f8f9fa;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    .post-title {
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-bottom: 10px;
+        color: #333;
+    }
+    
+    .post-meta {
+        color: #6c757d;
+        font-size: 0.9rem;
+        display: flex;
+        gap: 15px;
+        align-items: center;
+    }
+    
+    .post-stats {
+        display: flex;
+        gap: 15px;
+        margin-top: 10px;
+    }
+    
+    .stat-item {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        color: #6c757d;
+        font-size: 0.85rem;
+    }
+    
+    .sidebar {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .sidebar-module {
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+        padding: 20px;
+    }
+    
+    .module-title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #eee;
+        color: #333;
+    }
+    
+    .popular-post {
+        margin-bottom: 15px;
+        padding: 10px;
+        border-radius: 6px;
+        transition: background-color 0.3s ease;
+    }
+    
+    .popular-post:hover {
+        background-color: #f8f9fa;
+    }
+    
+    .popular-post h4 {
+        font-size: 0.95rem;
+        margin-bottom: 5px;
+        color: #333;
+    }
+    
+    .popular-post small {
+        color: #6c757d;
+        font-size: 0.8rem;
+    }
+    
+
+    
+    .search-form {
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+    
+    .search-input {
+        width: 100%;
+        padding: 10px 15px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-size: 1rem;
+    }
+    
+    .search-input:focus {
+        outline: none;
+        border-color: #667eea;
+        box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
+    }
+    
+    .category-filter {
+        margin-top: 15px;
+    }
+    
+    .category-select {
+        width: 100%;
+        padding: 8px 12px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-size: 0.9rem;
+    }
+    
+    .pagination {
+        display: flex;
+        justify-content: center;
+        margin-top: 30px;
+        gap: 10px;
+    }
+    
+    .page-link {
+        padding: 8px 12px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        text-decoration: none;
+        color: #333;
+        transition: all 0.3s ease;
+    }
+    
+    .page-link:hover {
+        background-color: #667eea;
+        color: white;
+        border-color: #667eea;
+    }
+    
+    .page-link.active {
+        background-color: #667eea;
+        color: white;
+        border-color: #667eea;
+    }
+    
+    @media (max-width: 768px) {
+        .main-container {
+            grid-template-columns: 1fr;
+        }
+        
+        .post-meta {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 5px;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+{% if not user.is_authenticated %}
+<div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; border-radius: 10px; margin-bottom: 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+    <h3 style="margin-bottom: 10px;">
+        <i class="fas fa-hand-wave"></i> 欢迎来到社区论坛！
+    </h3>
+    <p style="margin-bottom: 15px; opacity: 0.9;">
+        你可以浏览所有帖子，但登录后可以发布帖子、评论和参与更多互动。
+    </p>
+    <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+        <a href="{% url 'login' %}" style="
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            border: 1px solid rgba(255,255,255,0.3);
+            transition: all 0.3s ease;
+        " onmouseover="this.style.background='rgba(255,255,255,0.3)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'">
+            <i class="fas fa-sign-in-alt"></i> 登录
+        </a>
+        <a href="{% url 'register' %}" style="
+            background: white;
+            color: #667eea;
+            padding: 8px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        " onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+            <i class="fas fa-user-plus"></i> 注册
+        </a>
+    </div>
+</div>
+{% endif %}
+<div class="main-container">
+    <div class="post-list">
+        <!-- 搜索和筛选表单 -->
+        <div class="search-form">
+            <form method="get" action="{% url 'home' %}">
+                <input type="text" name="q" value="{{ query }}" placeholder="搜索帖子..." class="search-input">
+                <div class="category-filter">
+                    <select name="category" class="category-select">
+                        <option value="">所有分类</option>
+                        {% for category in categories %}
+                            <option value="{{ category.id }}" {% if category_id == category.id|stringformat:"s" %}selected{% endif %}>
+                                {{ category.name }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </form>
+        </div>
+        
+        <!-- 帖子列表 -->
+        <h2>最新帖子</h2>
+        {% for post in page_obj %}
+            <div class="post-card">
+                <h3 class="post-title">
+                    <a href="{% url 'post_detail' post.pk %}" style="color: inherit; text-decoration: none;">
+                        {{ post.title }}
+                    </a>
+                </h3>
+                <div class="post-meta">
+                    <span><i class="fas fa-user"></i> {{ post.author.username }}</span>
+                    <span><i class="fas fa-calendar"></i> {{ post.created_at|date:"Y-m-d H:i" }}</span>
+                    <span><i class="fas fa-folder"></i> {{ post.category.name }}</span>
+                </div>
+                <div class="post-stats">
+                    <div class="stat-item">
+                        <i class="fas fa-eye"></i>
+                        <span>{{ post.views }} 浏览</span>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-heart"></i>
+                        <span>{{ post.likes_count }} 赞</span>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-comment"></i>
+                        <span>{{ post.comments_count }} 评论</span>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <div style="text-align: center; padding: 40px; color: #6c757d;">
+                <i class="fas fa-inbox" style="font-size: 3rem; margin-bottom: 20px;"></i>
+                <p>暂无帖子</p>
+            </div>
+        {% endfor %}
+        
+        <!-- 分页 -->
+        {% if page_obj.has_other_pages %}
+            <div class="pagination">
+                {% if page_obj.has_previous %}
+                    <a href="?page={{ page_obj.previous_page_number }}{% if query %}&q={{ query }}{% endif %}{% if category_id %}&category={{ category_id }}{% endif %}" class="page-link">
+                        <i class="fas fa-chevron-left"></i>
+                    </a>
+                {% endif %}
+                
+                {% for num in page_obj.paginator.page_range %}
+                    {% if page_obj.number == num %}
+                        <span class="page-link active">{{ num }}</span>
+                    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                        <a href="?page={{ num }}{% if query %}&q={{ query }}{% endif %}{% if category_id %}&category={{ category_id }}{% endif %}" class="page-link">{{ num }}</a>
+                    {% endif %}
+                {% endfor %}
+                
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}{% if query %}&q={{ query }}{% endif %}{% if category_id %}&category={{ category_id }}{% endif %}" class="page-link">
+                        <i class="fas fa-chevron-right"></i>
+                    </a>
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+    
+    <div class="sidebar">
+        <!-- 热门帖子 -->
+        <div class="sidebar-module">
+            <h3 class="module-title">
+                <i class="fas fa-fire"></i> 热门帖子
+            </h3>
+            {% for post in popular_posts %}
+                <div class="popular-post">
+                    <h4>
+                        <a href="{% url 'post_detail' post.pk %}" style="color: inherit; text-decoration: none;">
+                            {{ post.title|truncatechars:30 }}
+                        </a>
+                    </h4>
+                    <small>{{ post.likes_count }} 赞 · {{ post.comments_count }} 评论</small>
+                </div>
+            {% empty %}
+                <p style="color: #6c757d; font-size: 0.9rem;">暂无热门帖子</p>
+            {% endfor %}
+        </div>
+        
+
+        
+        <!-- 热门标签 -->
+        <div class="sidebar-module">
+            <h3 class="module-title">
+                <i class="fas fa-tags"></i> 热门标签
+            </h3>
+            <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                {% for tag in popular_tags %}
+                    <a href="{% url 'tag_posts' tag.pk %}" style="
+                        background: #667eea;
+                        color: white;
+                        padding: 4px 8px;
+                        border-radius: 12px;
+                        font-size: 0.8rem;
+                        text-decoration: none;
+                        transition: all 0.3s ease;
+                    " onmouseover="this.style.background='#5a6fd8'" onmouseout="this.style.background='#667eea'">
+                        {{ tag.name }}
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

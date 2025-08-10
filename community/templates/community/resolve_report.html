@@ -1,0 +1,108 @@
+{% extends 'community/base.html' %}
+
+{% block title %}处理举报 - 社区论坛{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header bg-danger text-white">
+                <h4 class="mb-0">
+                    <i class="fas fa-shield-alt me-2"></i>处理举报
+                </h4>
+            </div>
+            <div class="card-body">
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <strong>举报者：</strong>
+                        <a href="{% url 'user_profile' report.reporter.username %}" class="text-decoration-none">
+                            {{ report.reporter.username }}
+                        </a>
+                    </div>
+                    <div class="col-md-6">
+                        <strong>举报类型：</strong>
+                        <span class="badge bg-{% if report.report_type == 'spam' %}warning{% elif report.report_type == 'inappropriate' %}danger{% elif report.report_type == 'harassment' %}danger{% elif report.report_type == 'copyright' %}info{% else %}secondary{% endif %}">
+                            {{ report.get_report_type_display }}
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <strong>举报时间：</strong>
+                        {{ report.created_at|date:"Y-m-d H:i" }}
+                    </div>
+                    <div class="col-md-6">
+                        <strong>当前状态：</strong>
+                        <span class="badge bg-{% if report.status == 'pending' %}warning{% elif report.status == 'reviewed' %}info{% elif report.status == 'resolved' %}success{% else %}secondary{% endif %}">
+                            {{ report.get_status_display }}
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h6 class="mb-0">举报原因</h6>
+                    </div>
+                    <div class="card-body">
+                        {{ report.reason|linebreaks }}
+                    </div>
+                </div>
+                
+                {% if report.post %}
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h6 class="mb-0">被举报的帖子</h6>
+                    </div>
+                    <div class="card-body">
+                        <h6>{{ report.post.title }}</h6>
+                        <p class="text-muted">{{ report.post.content|truncatewords:50 }}</p>
+                        <a href="{% url 'post_detail' report.post.pk %}" class="btn btn-sm btn-primary">
+                            <i class="fas fa-eye"></i> 查看完整帖子
+                        </a>
+                    </div>
+                </div>
+                {% endif %}
+                
+                {% if report.comment %}
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h6 class="mb-0">被举报的评论</h6>
+                    </div>
+                    <div class="card-body">
+                        <p>{{ report.comment.content }}</p>
+                        <small class="text-muted">评论者：{{ report.comment.author.username }}</small>
+                        <br>
+                        <a href="{% url 'post_detail' report.comment.post.pk %}" class="btn btn-sm btn-primary mt-2">
+                            <i class="fas fa-eye"></i> 查看原帖
+                        </a>
+                    </div>
+                </div>
+                {% endif %}
+                
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="admin_notes" class="form-label">处理备注</label>
+                        <textarea name="admin_notes" id="admin_notes" class="form-control" rows="4" placeholder="请输入处理备注...">{{ report.admin_notes }}</textarea>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between">
+                        <a href="{% url 'admin_reports' %}" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left me-1"></i>返回列表
+                        </a>
+                        <div>
+                            <button type="submit" name="action" value="dismiss" class="btn btn-warning me-2">
+                                <i class="fas fa-times me-1"></i>驳回举报
+                            </button>
+                            <button type="submit" name="action" value="resolve" class="btn btn-success">
+                                <i class="fas fa-check me-1"></i>处理完成
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

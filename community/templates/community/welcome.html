@@ -1,0 +1,164 @@
+{% extends 'community/base.html' %}
+{% load static %}
+
+{% block title %}欢迎来到社区论坛{% endblock %}
+
+{% block extra_css %}
+<style>
+    .welcome-hero {
+        background: linear-gradient(135deg, rgba(102, 126, 234, 0.9) 0%, rgba(118, 75, 162, 0.9) 100%), 
+                    url('{% static "images/微信图片_20250807183438_33.png" %}');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: white;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .welcome-content {
+        position: relative;
+        z-index: 2;
+        max-width: 1000px;
+        padding: 40px;
+    }
+    
+    .welcome-content h1 {
+        font-size: 3.5rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+        animation: fadeInUp 1s ease;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+    
+    .welcome-content p {
+        font-size: 1.3rem;
+        margin-bottom: 40px;
+        opacity: 0.95;
+        animation: fadeInUp 1s ease 0.2s both;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    }
+    
+    .welcome-btn {
+        display: inline-block;
+        padding: 15px 40px;
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+        text-decoration: none;
+        border-radius: 50px;
+        border: 2px solid white;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        animation: fadeInUp 1s ease 0.4s both;
+        backdrop-filter: blur(10px);
+    }
+    
+    .welcome-btn:hover {
+        background: white;
+        color: #667eea;
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+    
+    .welcome-features {
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+        margin-top: 60px;
+        animation: fadeInUp 1s ease 0.6s both;
+    }
+    
+    .feature-item {
+        max-width: 200px;
+        background: rgba(255, 255, 255, 0.1);
+        padding: 20px;
+        border-radius: 15px;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        transition: all 0.3s ease;
+    }
+    
+    .feature-item:hover {
+        transform: translateY(-5px);
+        background: rgba(255, 255, 255, 0.2);
+    }
+    
+    .feature-icon {
+        font-size: 2.5rem;
+        margin-bottom: 15px;
+    }
+    
+
+    
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .welcome-content h1 {
+            font-size: 2.5rem;
+        }
+        
+        .welcome-features {
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+        }
+        
+
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="welcome-hero">
+    <div class="welcome-content">
+        <h1>欢迎来到我们的社区</h1>
+        <p>一个分享知识、交流想法的友好空间</p>
+        
+        <a href="{% url 'home' %}" class="welcome-btn">
+            立即加入
+        </a>
+        
+        <div class="welcome-features">
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3>社区互动</h3>
+                <p>与志同道合的人交流</p>
+            </div>
+            
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+                <h3>知识分享</h3>
+                <p>获取和分享有价值的内容</p>
+            </div>
+            
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <h3>友好环境</h3>
+                <p>尊重和包容的交流氛围</p>
+            </div>
+        </div>
+        
+
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,105 @@
+{% extends 'community/base.html' %}
+
+{% block title %}{{ tag.name }} - 标签 - 社区论坛{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">
+                    <i class="fas fa-tag me-2"></i>标签：{{ tag.name }}
+                </h4>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <span class="badge" style="background-color: {{ tag.color }}; font-size: 1.1em;">
+                        {{ tag.name }}
+                    </span>
+                    <span class="text-muted ms-2">{{ tag.description }}</span>
+                </div>
+                
+                {% if page_obj %}
+                <div class="row">
+                    {% for post in page_obj %}
+                    <div class="col-12 mb-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div class="flex-grow-1">
+                                        <h5 class="card-title">
+                                            <a href="{% url 'post_detail' post.pk %}" class="text-decoration-none">
+                                                {{ post.title }}
+                                            </a>
+                                        </h5>
+                                        <p class="card-text text-muted">{{ post.content|striptags|truncatewords:30 }}</p>
+                                        <div class="d-flex align-items-center text-muted small">
+                                            <i class="fas fa-user"></i> 
+                                            <a href="{% url 'user_profile' post.author.username %}" class="text-decoration-none ms-1">
+                                                {{ post.author.username }}
+                                            </a>
+                                            <span class="mx-2">|</span>
+                                            <i class="fas fa-clock"></i> {{ post.created_at|timesince }}前
+                                            <span class="mx-2">|</span>
+                                            <i class="fas fa-eye"></i> {{ post.views }} 次浏览
+                                            <span class="mx-2">|</span>
+                                            <i class="fas fa-heart text-danger"></i> {{ post.get_likes_count }} 点赞
+                                        </div>
+                                    </div>
+                                    {% if post.is_pinned %}
+                                    <span class="badge bg-warning ms-2">
+                                        <i class="fas fa-thumbtack"></i> 置顶
+                                    </span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                
+                <!-- 分页 -->
+                {% if page_obj.has_other_pages %}
+                <nav aria-label="分页" class="mt-4">
+                    <ul class="pagination justify-content-center">
+                        {% if page_obj.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.previous_page_number }}">
+                                <i class="fas fa-chevron-left"></i> 上一页
+                            </a>
+                        </li>
+                        {% endif %}
+
+                        {% for num in page_obj.paginator.page_range %}
+                            {% if page_obj.number == num %}
+                            <li class="page-item active">
+                                <span class="page-link">{{ num }}</span>
+                            </li>
+                            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                            </li>
+                            {% endif %}
+                        {% endfor %}
+
+                        {% if page_obj.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.next_page_number }}">
+                                下一页 <i class="fas fa-chevron-right"></i>
+                            </a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+                {% endif %}
+                {% else %}
+                <div class="text-center text-muted py-5">
+                    <i class="fas fa-file-alt fa-3x mb-3"></i>
+                    <p>该标签下暂无帖子</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

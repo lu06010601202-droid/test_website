@@ -1,0 +1,175 @@
+{% extends 'community/base.html' %}
+
+{% block title %}{{ profile_user.username }} 的资料 - 社区论坛{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-8">
+        <!-- 用户信息卡片 -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3 text-center">
+                        {% if profile.avatar %}
+                        <img src="{{ profile.avatar.url }}" alt="头像" class="rounded-circle img-fluid mb-3" style="width: 120px; height: 120px; object-fit: cover;">
+                        {% else %}
+                        <div class="bg-secondary rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 120px; height: 120px;">
+                            <i class="fas fa-user fa-3x text-white"></i>
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-9">
+                        <h3>{{ profile_user.username }}</h3>
+                        {% if profile.bio %}
+                        <p class="text-muted">{{ profile.bio }}</p>
+                        {% endif %}
+                        <div class="row">
+                            {% if profile.location %}
+                            <div class="col-sm-6">
+                                <i class="fas fa-map-marker-alt text-primary"></i> {{ profile.location }}
+                            </div>
+                            {% endif %}
+                            {% if profile.website %}
+                            <div class="col-sm-6">
+                                <i class="fas fa-globe text-success"></i> 
+                                <a href="{{ profile.website }}" target="_blank">{{ profile.website }}</a>
+                            </div>
+                            {% endif %}
+                        </div>
+                        <div class="mt-2">
+                            <small class="text-muted">
+                                <i class="fas fa-calendar"></i> 加入时间：{{ profile.join_date|date:"Y年m月d日" }}
+                            </small>
+                        </div>
+                        {% if user == profile_user %}
+                        <div class="mt-3">
+                            <a href="{% url 'profile_edit' %}" class="btn btn-outline-primary btn-sm">
+                                <i class="fas fa-edit"></i> 编辑资料
+                            </a>
+                        </div>
+                        {% elif user.is_authenticated %}
+                        <div class="mt-3">
+                            <form method="post" action="{% url 'follow_user' profile_user.username %}" class="d-inline">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-primary btn-sm">
+                                    <i class="fas fa-user-plus"></i> 
+                                    {% if user in profile_user.followers.all %}取消关注{% else %}关注{% endif %}
+                                </button>
+                            </form>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 统计信息 -->
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h4 class="text-primary">{{ posts.count }}</h4>
+                        <p class="mb-0">发布的帖子</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h4 class="text-success">{{ comments.count }}</h4>
+                        <p class="mb-0">发表的评论</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h4 class="text-info">{{ profile_user.followers.count }}</h4>
+                        <p class="mb-0">关注者</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h4 class="text-warning">{{ profile_user.following.count }}</h4>
+                        <p class="mb-0">关注中</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 发布的帖子 -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="fas fa-file-alt"></i> 发布的帖子 ({{ posts.count }})</h5>
+            </div>
+            <div class="card-body">
+                {% if posts %}
+                    {% for post in posts %}
+                    <div class="border-bottom pb-3 mb-3">
+                        <h6>
+                            <a href="{% url 'post_detail' post.pk %}" class="text-decoration-none">
+                                {{ post.title }}
+                            </a>
+                        </h6>
+                        <div class="text-muted small">
+                            <i class="fas fa-clock"></i> {{ post.created_at|timesince }}前
+                            {% if post.category %}
+                            | <i class="fas fa-folder"></i> {{ post.category.name }}
+                            {% endif %}
+                            | <i class="fas fa-eye"></i> {{ post.views }} 次浏览
+                            | <i class="fas fa-comments"></i> {{ post.comments.count }} 条评论
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <p class="text-muted text-center py-3">暂无发布的帖子</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- 发表的评论 -->
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="fas fa-comments"></i> 发表的评论 ({{ comments.count }})</h5>
+            </div>
+            <div class="card-body">
+                {% if comments %}
+                    {% for comment in comments %}
+                    <div class="border-bottom pb-3 mb-3">
+                        <div class="d-flex justify-content-between">
+                            <div class="flex-grow-1">
+                                <p class="mb-1">{{ comment.content }}</p>
+                                <small class="text-muted">
+                                    评论于 <a href="{% url 'post_detail' comment.post.pk %}" class="text-decoration-none">
+                                        {{ comment.post.title }}
+                                    </a>
+                                </small>
+                            </div>
+                            <small class="text-muted ms-2">{{ comment.created_at|timesince }}前</small>
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <p class="text-muted text-center py-3">暂无发表的评论</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- 侧边栏 -->
+    <div class="col-lg-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="fas fa-arrow-left"></i> 返回</h5>
+            </div>
+            <div class="card-body">
+                <a href="{% url 'home' %}" class="btn btn-outline-primary w-100">
+                    <i class="fas fa-home"></i> 返回首页
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

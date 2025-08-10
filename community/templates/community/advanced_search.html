@@ -1,0 +1,255 @@
+{% extends 'community/base.html' %}
+{% load static %}
+
+{% block title %}高级搜索 - 社区论坛{% endblock %}
+
+{% block extra_css %}
+<style>
+    body {
+        background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%), 
+                    url('{% static "images/微信图片_20250807183438_37.png" %}');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        min-height: 100vh;
+    }
+    
+    .search-container {
+        max-width: 1000px;
+        margin: 30px auto;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .search-header {
+        text-align: center;
+        margin-bottom: 30px;
+        border-bottom: 2px solid #eee;
+        padding-bottom: 20px;
+    }
+    
+    .search-header h1 {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #333;
+        margin-bottom: 10px;
+    }
+    
+    .search-form {
+        background: rgba(248, 249, 250, 0.5);
+        padding: 25px;
+        border-radius: 10px;
+        margin-bottom: 30px;
+    }
+    
+    .form-group {
+        margin-bottom: 20px;
+    }
+    
+    .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #333;
+    }
+    
+    .form-control {
+        width: 100%;
+        padding: 12px 15px;
+        border: 2px solid #e1e5e9;
+        border-radius: 8px;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+    }
+    
+    .form-control:focus {
+        outline: none;
+        border-color: #667eea;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+    
+    .search-btn {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border: none;
+        color: white;
+        font-weight: 600;
+        padding: 12px 30px;
+        border-radius: 8px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .search-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+    }
+    
+    .results-section {
+        margin-top: 30px;
+    }
+    
+    .result-item {
+        background: rgba(248, 249, 250, 0.5);
+        padding: 20px;
+        border-radius: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #eee;
+        transition: all 0.3s ease;
+    }
+    
+    .result-item:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .result-title {
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-bottom: 10px;
+        color: #333;
+    }
+    
+    .result-meta {
+        color: #6c757d;
+        font-size: 0.9rem;
+        margin-bottom: 10px;
+    }
+    
+    .result-content {
+        color: #555;
+        line-height: 1.6;
+    }
+    
+    .no-results {
+        text-align: center;
+        padding: 40px;
+        color: #6c757d;
+    }
+    
+    .no-results i {
+        font-size: 3rem;
+        margin-bottom: 20px;
+        color: #ddd;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="search-container">
+    <div class="search-header">
+        <h1><i class="fas fa-search"></i> 高级搜索</h1>
+        <p>使用多种条件精确搜索您需要的内容</p>
+    </div>
+    
+    <div class="search-form">
+        <form method="get" action="{% url 'advanced_search' %}">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="q">搜索关键词</label>
+                        <input type="text" name="q" id="q" class="form-control" value="{{ query }}" placeholder="输入关键词...">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="search_type">搜索类型</label>
+                        <select name="search_type" id="search_type" class="form-control">
+                            <option value="all" {% if search_type == 'all' %}selected{% endif %}>全部</option>
+                            <option value="title" {% if search_type == 'title' %}selected{% endif %}>标题</option>
+                            <option value="content" {% if search_type == 'content' %}selected{% endif %}>内容</option>
+                            <option value="author" {% if search_type == 'author' %}selected{% endif %}>作者</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="category">分类</label>
+                        <select name="category" id="category" class="form-control">
+                            <option value="">所有分类</option>
+                            {% for category in categories %}
+                                <option value="{{ category.id }}" {% if selected_category == category.id %}selected{% endif %}>
+                                    {{ category.name }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="date_from">开始日期</label>
+                        <input type="date" name="date_from" id="date_from" class="form-control" value="{{ date_from }}">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="date_to">结束日期</label>
+                        <input type="date" name="date_to" id="date_to" class="form-control" value="{{ date_to }}">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="sort_by">排序方式</label>
+                        <select name="sort_by" id="sort_by" class="form-control">
+                            <option value="relevance" {% if sort_by == 'relevance' %}selected{% endif %}>相关度</option>
+                            <option value="date" {% if sort_by == 'date' %}selected{% endif %}>发布时间</option>
+                            <option value="views" {% if sort_by == 'views' %}selected{% endif %}>浏览量</option>
+                            <option value="likes" {% if sort_by == 'likes' %}selected{% endif %}>点赞数</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>&nbsp;</label>
+                        <button type="submit" class="search-btn w-100">
+                            <i class="fas fa-search"></i> 搜索
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    
+    {% if query %}
+    <div class="results-section">
+        <h3>搜索结果 ({{ results.count }})</h3>
+        
+        {% if results %}
+            {% for result in results %}
+                <div class="result-item">
+                    <h4 class="result-title">
+                        <a href="{{ result.url }}" style="color: inherit; text-decoration: none;">
+                            {{ result.title }}
+                        </a>
+                    </h4>
+                    <div class="result-meta">
+                        <span><i class="fas fa-user"></i> {{ result.author }}</span>
+                        <span><i class="fas fa-calendar"></i> {{ result.created_at|date:"Y-m-d" }}</span>
+                        <span><i class="fas fa-eye"></i> {{ result.views }} 浏览</span>
+                    </div>
+                    <div class="result-content">
+                        {{ result.content|truncatewords:50 }}
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="no-results">
+                <i class="fas fa-search"></i>
+                <p>没有找到相关结果</p>
+                <p>请尝试使用不同的关键词或调整搜索条件</p>
+            </div>
+        {% endif %}
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

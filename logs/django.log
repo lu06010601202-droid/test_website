@@ -1,0 +1,346 @@
+INFO 2025-08-07 21:49:20,234 autoreload 2216 16336 Watching for file changes with StatReloader
+INFO 2025-08-07 21:49:23,837 basehttp 2216 7832 "GET / HTTP/1.1" 200 9285
+INFO 2025-08-07 21:49:24,044 basehttp 2216 10868 "GET /static/images/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20250807183438_32.png HTTP/1.1" 304 0
+INFO 2025-08-07 21:49:24,045 basehttp 2216 4188 "GET /static/images/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20250807183438_34.png HTTP/1.1" 304 0
+INFO 2025-08-07 21:49:24,045 basehttp 2216 4760 "GET /static/images/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20250807183438_35.png HTTP/1.1" 304 0
+INFO 2025-08-07 21:49:24,047 basehttp 2216 5720 "GET /static/css/responsive.css HTTP/1.1" 304 0
+INFO 2025-08-07 21:49:24,049 basehttp 2216 6472 "GET /static/images/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20250807183438_36.png HTTP/1.1" 304 0
+INFO 2025-08-07 21:49:24,060 basehttp 2216 144 "GET /static/images/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20250807183438_37.png HTTP/1.1" 304 0
+INFO 2025-08-07 21:49:24,108 basehttp 2216 144 "GET /static/images/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20250807183438_33.png HTTP/1.1" 304 0
+WARNING 2025-08-07 21:49:24,246 log 2216 144 Not Found: /favicon.ico
+WARNING 2025-08-07 21:49:24,248 basehttp 2216 144 "GET /favicon.ico HTTP/1.1" 404 11699
+INFO 2025-08-07 21:49:27,859 basehttp 2216 10580 "GET /login/ HTTP/1.1" 200 5788
+INFO 2025-08-07 21:49:33,201 basehttp 2216 10580 "POST /login/ HTTP/1.1" 302 0
+INFO 2025-08-07 21:49:33,299 basehttp 2216 10580 "GET /forum/ HTTP/1.1" 200 13431
+WARNING 2025-08-07 21:49:37,791 log 2216 10580 Not Found: /admin/posts/review/
+WARNING 2025-08-07 21:49:37,793 basehttp 2216 10580 "GET /admin/posts/review/ HTTP/1.1" 404 8537
+INFO 2025-08-08 13:11:15,740 autoreload 10556 7824 Watching for file changes with StatReloader
+INFO 2025-08-08 13:11:18,727 basehttp 10556 10916 "GET / HTTP/1.1" 200 9285
+INFO 2025-08-08 13:11:18,801 basehttp 10556 10916 "GET /static/css/responsive.css HTTP/1.1" 304 0
+INFO 2025-08-08 13:11:18,810 basehttp 10556 10916 "GET /static/images/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20250807183438_32.png HTTP/1.1" 304 0
+INFO 2025-08-08 13:11:18,811 basehttp 10556 12528 "GET /static/images/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20250807183438_34.png HTTP/1.1" 304 0
+INFO 2025-08-08 13:11:18,818 basehttp 10556 14628 "GET /static/images/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20250807183438_36.png HTTP/1.1" 304 0
+INFO 2025-08-08 13:11:18,818 basehttp 10556 15572 "GET /static/images/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20250807183438_35.png HTTP/1.1" 304 0
+INFO 2025-08-08 13:11:18,819 basehttp 10556 9136 "GET /static/images/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20250807183438_37.png HTTP/1.1" 304 0
+INFO 2025-08-08 13:11:18,835 basehttp 10556 9136 "GET /static/images/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20250807183438_33.png HTTP/1.1" 304 0
+WARNING 2025-08-08 13:11:18,995 log 10556 9136 Not Found: /favicon.ico
+WARNING 2025-08-08 13:11:18,995 basehttp 10556 9136 "GET /favicon.ico HTTP/1.1" 404 11699
+INFO 2025-08-08 13:15:21,268 autoreload 7204 11636 Watching for file changes with StatReloader
+INFO 2025-08-08 13:15:23,482 basehttp 7204 12456 "GET / HTTP/1.1" 200 7664
+INFO 2025-08-08 13:15:27,628 basehttp 7204 12456 "GET /login/ HTTP/1.1" 200 5788
+INFO 2025-08-08 13:15:33,116 basehttp 7204 9860 "POST /login/ HTTP/1.1" 302 0
+INFO 2025-08-08 13:15:33,213 basehttp 7204 9860 "GET /forum/ HTTP/1.1" 200 13431
+INFO 2025-08-08 13:15:48,149 basehttp 7204 2192 "GET /login/ HTTP/1.1" 200 8868
+INFO 2025-08-08 13:15:48,873 basehttp 7204 2192 "GET / HTTP/1.1" 302 0
+INFO 2025-08-08 13:15:58,487 basehttp 7204 6048 "GET / HTTP/1.1" 302 0
+INFO 2025-08-08 13:16:07,742 basehttp 7204 3684 "GET / HTTP/1.1" 302 0
+INFO 2025-08-08 13:18:29,728 autoreload 3108 17412 Watching for file changes with StatReloader
+INFO 2025-08-08 13:18:32,076 basehttp 3108 8024 "GET / HTTP/1.1" 302 0
+INFO 2025-08-08 13:18:44,678 basehttp 3108 11108 "GET / HTTP/1.1" 302 0
+INFO 2025-08-08 13:19:27,451 autoreload 11712 12408 Watching for file changes with StatReloader
+INFO 2025-08-08 13:19:29,949 basehttp 11712 6920 "GET / HTTP/1.1" 302 0
+INFO 2025-08-08 13:20:08,482 basehttp 11712 11636 "GET / HTTP/1.1" 302 0
+INFO 2025-08-08 13:21:26,036 autoreload 5748 8140 Watching for file changes with StatReloader
+INFO 2025-08-08 13:21:29,060 basehttp 5748 9708 "GET / HTTP/1.1" 302 0
+INFO 2025-08-08 13:21:29,133 basehttp 5748 9708 "GET /forum/ HTTP/1.1" 200 13145
+WARNING 2025-08-08 13:21:36,084 log 5748 15480 Not Found: /admin/posts/review/
+WARNING 2025-08-08 13:21:36,088 basehttp 5748 15480 "GET /admin/posts/review/ HTTP/1.1" 404 8537
+WARNING 2025-08-08 13:21:40,711 log 5748 18360 Not Found: /admin/reports/
+WARNING 2025-08-08 13:21:40,711 basehttp 5748 18360 "GET /admin/reports/ HTTP/1.1" 404 8522
+WARNING 2025-08-08 13:22:28,383 log 5748 15880 Not Found: /admin/statistics/
+WARNING 2025-08-08 13:22:28,385 basehttp 5748 15880 "GET /admin/statistics/ HTTP/1.1" 404 8531
+WARNING 2025-08-08 13:22:54,529 log 5748 15320 Method Not Allowed (GET): /logout/
+WARNING 2025-08-08 13:22:54,535 basehttp 5748 15320 "GET /logout/ HTTP/1.1" 405 0
+WARNING 2025-08-08 13:23:00,043 log 5748 9824 Method Not Allowed (GET): /logout/
+WARNING 2025-08-08 13:23:00,045 basehttp 5748 9824 "GET /logout/ HTTP/1.1" 405 0
+INFO 2025-08-08 13:25:27,845 autoreload 5748 8140 C:\Users\31550\Desktop\大学\python\website\community\views.py changed, reloading.
+INFO 2025-08-08 13:25:29,454 autoreload 5204 14156 Watching for file changes with StatReloader
+INFO 2025-08-08 13:25:31,076 autoreload 5204 14156 C:\Users\31550\Desktop\大学\python\website\community\views.py changed, reloading.
+INFO 2025-08-08 13:25:32,990 autoreload 8412 2892 Watching for file changes with StatReloader
+INFO 2025-08-08 13:25:53,749 autoreload 8412 2892 C:\Users\31550\Desktop\大学\python\website\community\views.py changed, reloading.
+INFO 2025-08-08 13:25:55,224 autoreload 13424 12104 Watching for file changes with StatReloader
+INFO 2025-08-08 13:25:56,649 autoreload 13424 12104 C:\Users\31550\Desktop\大学\python\website\community\views.py changed, reloading.
+INFO 2025-08-08 13:25:58,449 autoreload 17172 17440 Watching for file changes with StatReloader
+INFO 2025-08-08 13:26:05,127 autoreload 17172 17440 C:\Users\31550\Desktop\大学\python\website\community\urls.py changed, reloading.
+INFO 2025-08-08 13:26:06,775 autoreload 16652 8628 Watching for file changes with StatReloader
+INFO 2025-08-08 13:27:16,013 autoreload 16652 8628 C:\Users\31550\Desktop\大学\python\website\community\views.py changed, reloading.
+INFO 2025-08-08 13:27:17,888 autoreload 4136 5240 Watching for file changes with StatReloader
+INFO 2025-08-08 13:31:14,989 autoreload 4136 5240 C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\haystack\__init__.py changed, reloading.
+INFO 2025-08-08 13:31:17,802 autoreload 4296 14616 Watching for file changes with StatReloader
+INFO 2025-08-08 13:31:49,769 autoreload 4296 14616 C:\Users\31550\Desktop\大学\python\website\forum\settings.py changed, reloading.
+INFO 2025-08-08 13:31:51,484 autoreload 15648 11104 Watching for file changes with StatReloader
+INFO 2025-08-08 13:32:02,262 autoreload 15648 11104 C:\Users\31550\Desktop\大学\python\website\forum\settings.py changed, reloading.
+INFO 2025-08-08 13:32:03,696 autoreload 8776 12312 Watching for file changes with StatReloader
+INFO 2025-08-08 15:20:33,941 autoreload 8752 12392 Watching for file changes with StatReloader
+INFO 2025-08-08 15:20:36,453 basehttp 8752 2872 "GET / HTTP/1.1" 200 7884
+INFO 2025-08-08 15:20:36,898 basehttp 8752 2872 "GET /static/css/responsive.css HTTP/1.1" 304 0
+INFO 2025-08-08 15:20:36,970 basehttp 8752 2872 "GET /static/images/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20250807183438_33.png HTTP/1.1" 304 0
+INFO 2025-08-08 15:20:40,160 basehttp 8752 14640 "GET /forum/ HTTP/1.1" 200 18908
+INFO 2025-08-08 15:20:40,290 basehttp 8752 14640 "GET /static/images/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20250807183438_32.png HTTP/1.1" 304 0
+INFO 2025-08-08 15:20:46,925 basehttp 8752 14640 "GET /login/ HTTP/1.1" 200 6008
+INFO 2025-08-08 15:20:53,177 basehttp 8752 7604 "POST /login/ HTTP/1.1" 302 0
+INFO 2025-08-08 15:20:53,186 basehttp 8752 7604 "GET /forum/ HTTP/1.1" 200 18908
+ERROR 2025-08-08 15:20:59,290 log 8752 15436 Internal Server Error: /login/
+Traceback (most recent call last):
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\31550\Desktop\大学\python\website\community\views.py", line 269, in user_login
+    return render(request, 'community/login.html', {'form': form})
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\template\base.py", line 171, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\template\loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\template\defaulttags.py", line 327, in render
+    return nodelist.render(context)
+           ~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\template\defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'post_review_list' not found. 'post_review_list' is not a valid view function or pattern name.
+ERROR 2025-08-08 15:20:59,300 basehttp 8752 15436 "GET /login/ HTTP/1.1" 500 170968
+ERROR 2025-08-08 15:21:08,146 log 8752 9140 Internal Server Error: /post/create/
+Traceback (most recent call last):
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\31550\Desktop\大学\python\website\community\views.py", line 158, in post_create
+    return render(request, 'community/post_form.html', {'form': form, 'title': '发布新帖子'})
+           ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\template\base.py", line 171, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\template\loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\template\defaulttags.py", line 327, in render
+    return nodelist.render(context)
+           ~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\template\defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'post_review_list' not found. 'post_review_list' is not a valid view function or pattern name.
+ERROR 2025-08-08 15:21:08,167 basehttp 8752 9140 "GET /post/create/ HTTP/1.1" 500 177608
+INFO 2025-08-08 15:21:21,304 basehttp 8752 15604 "GET / HTTP/1.1" 302 0
+ERROR 2025-08-08 15:21:29,282 log 8752 11544 Internal Server Error: /login/
+Traceback (most recent call last):
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\31550\Desktop\大学\python\website\community\views.py", line 269, in user_login
+    return render(request, 'community/login.html', {'form': form})
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\template\base.py", line 171, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\template\loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\template\defaulttags.py", line 327, in render
+    return nodelist.render(context)
+           ~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\template\defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'post_review_list' not found. 'post_review_list' is not a valid view function or pattern name.
+ERROR 2025-08-08 15:21:29,290 basehttp 8752 11544 "GET /login/ HTTP/1.1" 500 170968
+INFO 2025-08-08 15:24:27,532 autoreload 16992 9896 Watching for file changes with StatReloader
+INFO 2025-08-08 15:24:30,111 basehttp 16992 12192 "GET / HTTP/1.1" 200 7884
+WARNING 2025-08-08 15:24:31,007 log 16992 13632 Not Found: /favicon.ico
+WARNING 2025-08-08 15:24:31,016 basehttp 16992 13632 "GET /favicon.ico HTTP/1.1" 404 12313
+INFO 2025-08-08 15:24:34,101 basehttp 16992 13632 "GET /login/ HTTP/1.1" 200 6008
+INFO 2025-08-08 15:24:39,444 basehttp 16992 15840 "POST /login/ HTTP/1.1" 302 0
+ERROR 2025-08-08 15:24:39,910 log 16992 12064 Internal Server Error: /forum/
+Traceback (most recent call last):
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\utils\decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\utils\decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\31550\Desktop\大学\python\website\community\views.py", line 88, in home
+    return render(request, 'community/home.html', context)
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\template\base.py", line 171, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\template\loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\template\defaulttags.py", line 327, in render
+    return nodelist.render(context)
+           ~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\template\defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "C:\Users\31550\Desktop\大学\python\website\venv\Lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'post_review_list' not found. 'post_review_list' is not a valid view function or pattern name.
+ERROR 2025-08-08 15:24:39,933 basehttp 16992 12064 "GET /forum/ HTTP/1.1" 500 190478
+INFO 2025-08-08 15:27:53,519 autoreload 13948 17900 Watching for file changes with StatReloader
+INFO 2025-08-08 15:27:56,707 basehttp 13948 13932 "GET / HTTP/1.1" 200 7884
+WARNING 2025-08-08 15:27:57,173 log 13948 6916 Not Found: /favicon.ico
+WARNING 2025-08-08 15:27:57,174 basehttp 13948 6916 "GET /favicon.ico HTTP/1.1" 404 12313
+INFO 2025-08-08 15:28:00,074 basehttp 13948 3132 "GET /forum/ HTTP/1.1" 200 18908
+INFO 2025-08-08 15:28:01,493 basehttp 13948 8500 "GET /login/ HTTP/1.1" 200 6008
+INFO 2025-08-08 15:28:06,815 basehttp 13948 8500 "POST /login/ HTTP/1.1" 302 0
+INFO 2025-08-08 15:28:06,824 basehttp 13948 8500 "GET /forum/ HTTP/1.1" 200 18908
+INFO 2025-08-08 15:28:14,527 basehttp 13948 1448 "GET /login/ HTTP/1.1" 200 8947
+INFO 2025-08-08 15:28:20,611 basehttp 13948 1448 - Broken pipe from ('127.0.0.1', 9197)
+INFO 2025-08-08 15:28:21,840 basehttp 13948 13024 "GET / HTTP/1.1" 302 0
+INFO 2025-08-08 15:28:22,202 basehttp 13948 13516 - Broken pipe from ('127.0.0.1', 9198)
+INFO 2025-08-08 15:28:23,867 basehttp 13948 13024 "GET /login/ HTTP/1.1" 200 8947
+INFO 2025-08-08 15:28:29,263 basehttp 13948 13024 "POST /login/ HTTP/1.1" 302 0
+INFO 2025-08-08 15:28:29,270 basehttp 13948 13024 "GET /forum/ HTTP/1.1" 200 18908
+INFO 2025-08-08 15:28:35,720 basehttp 13948 14748 "GET / HTTP/1.1" 302 0
+INFO 2025-08-08 15:29:31,099 autoreload 13948 17900 C:\Users\31550\Desktop\大学\python\website\forum\settings.py changed, reloading.
+INFO 2025-08-08 15:29:32,608 autoreload 14552 3260 Watching for file changes with StatReloader
+INFO 2025-08-08 15:29:46,557 autoreload 14552 3260 C:\Users\31550\Desktop\大学\python\website\community\views.py changed, reloading.
+INFO 2025-08-08 15:29:48,121 autoreload 6808 9072 Watching for file changes with StatReloader
+INFO 2025-08-08 15:30:21,785 autoreload 6808 9072 C:\Users\31550\Desktop\大学\python\website\community\views.py changed, reloading.
+INFO 2025-08-08 15:30:23,629 autoreload 16024 11684 Watching for file changes with StatReloader

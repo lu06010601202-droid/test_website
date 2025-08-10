@@ -1,0 +1,158 @@
+{% extends 'community/base.html' %}
+
+{% block title %}{{ category.name }} - 社区论坛{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-8">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2><i class="fas fa-folder"></i> {{ category.name }}</h2>
+            {% if user.is_authenticated %}
+            <a href="{% url 'post_create' %}" class="btn btn-success">
+                <i class="fas fa-plus"></i> 发布新帖子
+            </a>
+            {% endif %}
+        </div>
+
+        {% if category.description %}
+        <div class="card mb-4">
+            <div class="card-body">
+                <p class="mb-0">{{ category.description }}</p>
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- 帖子列表 -->
+        {% if page_obj %}
+            {% for post in page_obj %}
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div class="flex-grow-1">
+                            <h5 class="card-title">
+                                {% if post.is_pinned %}
+                                <span class="badge bg-warning me-2"><i class="fas fa-thumbtack"></i> 置顶</span>
+                                {% endif %}
+                                <a href="{% url 'post_detail' post.pk %}" class="text-decoration-none">
+                                    {{ post.title }}
+                                </a>
+                            </h5>
+                            <p class="card-text text-muted">
+                                {{ post.content|striptags|truncatewords:30 }}
+                            </p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="text-muted small">
+                                    <i class="fas fa-user"></i> 
+                                    <a href="{% url 'user_profile' post.author.username %}" class="text-decoration-none">
+                                        {{ post.author.username }}
+                                    </a>
+                                    | <i class="fas fa-clock"></i> {{ post.created_at|timesince }}前
+                                    | <i class="fas fa-eye"></i> {{ post.views }} 次浏览
+                                </div>
+                                {% if post.tags %}
+                                <div class="small">
+                                    <i class="fas fa-tags"></i> {{ post.tags }}
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+            <!-- 分页 -->
+            {% if page_obj.has_other_pages %}
+            <nav aria-label="分页导航">
+                <ul class="pagination justify-content-center">
+                    {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}">
+                            <i class="fas fa-chevron-left"></i> 上一页
+                        </a>
+                    </li>
+                    {% endif %}
+
+                    {% for num in page_obj.paginator.page_range %}
+                        {% if page_obj.number == num %}
+                        <li class="page-item active">
+                            <span class="page-link">{{ num }}</span>
+                        </li>
+                        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                        </li>
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if page_obj.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.next_page_number }}">
+                            下一页 <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+            {% endif %}
+        {% else %}
+            <div class="text-center py-5">
+                <i class="fas fa-inbox fa-3x text-muted mb-3"></i>
+                <h4 class="text-muted">该分类暂无帖子</h4>
+                <p class="text-muted">成为第一个在此分类发布帖子的人吧！</p>
+                {% if user.is_authenticated %}
+                <a href="{% url 'post_create' %}" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> 发布新帖子
+                </a>
+                {% else %}
+                <a href="{% url 'login' %}" class="btn btn-primary">
+                    <i class="fas fa-sign-in-alt"></i> 登录发布
+                </a>
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- 侧边栏 -->
+    <div class="col-lg-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="fas fa-info-circle"></i> 分类信息</h5>
+            </div>
+            <div class="card-body">
+                <ul class="list-unstyled">
+                    <li class="mb-2">
+                        <i class="fas fa-folder text-primary"></i> 
+                        <strong>分类名称：</strong>{{ category.name }}
+                    </li>
+                    {% if category.description %}
+                    <li class="mb-2">
+                        <i class="fas fa-info text-info"></i> 
+                        <strong>描述：</strong>{{ category.description }}
+                    </li>
+                    {% endif %}
+                    <li class="mb-2">
+                        <i class="fas fa-file text-success"></i> 
+                        <strong>帖子数量：</strong>{{ page_obj.paginator.count }}
+                    </li>
+                    <li class="mb-2">
+                        <i class="fas fa-clock text-warning"></i> 
+                        <strong>创建时间：</strong>{{ category.created_at|date:"Y-m-d" }}
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card mt-3">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="fas fa-arrow-left"></i> 返回</h5>
+            </div>
+            <div class="card-body">
+                <a href="{% url 'home' %}" class="btn btn-outline-primary w-100">
+                    <i class="fas fa-home"></i> 返回首页
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

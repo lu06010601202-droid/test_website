@@ -1,0 +1,143 @@
+{% extends 'community/base.html' %}
+
+{% block title %}通知 - 社区论坛{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-8">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">
+                    <i class="fas fa-bell"></i> 通知
+                    {% if unread_count > 0 %}
+                    <span class="badge bg-danger ms-2">{{ unread_count }}</span>
+                    {% endif %}
+                </h5>
+                {% if page_obj %}
+                <form method="post" class="d-inline">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-sm btn-outline-primary">
+                        <i class="fas fa-check-double"></i> 全部标记为已读
+                    </button>
+                </form>
+                {% endif %}
+            </div>
+            <div class="card-body">
+                {% if page_obj %}
+                    {% for notification in page_obj %}
+                    <div class="border-bottom pb-3 mb-3 {% if not notification.is_read %}bg-light{% endif %}">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div class="flex-grow-1">
+                                <div class="d-flex align-items-center mb-2">
+                                    <strong>
+                                        <a href="{% url 'user_profile' notification.sender.username %}" class="text-decoration-none">
+                                            {{ notification.sender.username }}
+                                        </a>
+                                    </strong>
+                                    <small class="text-muted ms-2">{{ notification.created_at|timesince }}前</small>
+                                    {% if not notification.is_read %}
+                                    <span class="badge bg-primary ms-2">新</span>
+                                    {% endif %}
+                                </div>
+                                <p class="mb-1">{{ notification.message }}</p>
+                                {% if notification.post %}
+                                <small class="text-muted">
+                                    <a href="{% url 'post_detail' notification.post.pk %}" class="text-decoration-none">
+                                        <i class="fas fa-external-link-alt"></i> 查看相关帖子
+                                    </a>
+                                </small>
+                                {% endif %}
+                            </div>
+                            {% if not notification.is_read %}
+                            <div class="ms-2">
+                                <a href="{% url 'mark_notification_read' notification.pk %}" class="btn btn-outline-success btn-sm">
+                                    <i class="fas fa-check"></i> 标记已读
+                                </a>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                    <!-- 分页 -->
+                    {% if page_obj.has_other_pages %}
+                    <nav aria-label="通知分页">
+                        <ul class="pagination justify-content-center">
+                            {% if page_obj.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ page_obj.previous_page_number }}">
+                                    <i class="fas fa-chevron-left"></i> 上一页
+                                </a>
+                            </li>
+                            {% endif %}
+
+                            {% for num in page_obj.paginator.page_range %}
+                                {% if page_obj.number == num %}
+                                <li class="page-item active">
+                                    <span class="page-link">{{ num }}</span>
+                                </li>
+                                {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                                </li>
+                                {% endif %}
+                            {% endfor %}
+
+                            {% if page_obj.has_next %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ page_obj.next_page_number }}">
+                                    下一页 <i class="fas fa-chevron-right"></i>
+                                </a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                    {% endif %}
+                {% else %}
+                    <div class="text-center py-5">
+                        <i class="fas fa-bell-slash fa-3x text-muted mb-3"></i>
+                        <h4 class="text-muted">暂无通知</h4>
+                        <p class="text-muted">当你收到评论或点赞时，通知会显示在这里</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- 侧边栏 -->
+    <div class="col-lg-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="fas fa-info-circle"></i> 通知说明</h5>
+            </div>
+            <div class="card-body">
+                <ul class="list-unstyled">
+                    <li class="mb-2">
+                        <i class="fas fa-comment text-primary"></i> 
+                        <strong>评论通知：</strong>当有人评论你的帖子时
+                    </li>
+                    <li class="mb-2">
+                        <i class="fas fa-heart text-danger"></i> 
+                        <strong>点赞通知：</strong>当有人点赞你的帖子时
+                    </li>
+                    <li class="mb-2">
+                        <i class="fas fa-check text-success"></i> 
+                        <strong>已读状态：</strong>点击"标记已读"或"全部标记为已读"
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card mt-3">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="fas fa-arrow-left"></i> 返回</h5>
+            </div>
+            <div class="card-body">
+                <a href="{% url 'home' %}" class="btn btn-outline-primary w-100">
+                    <i class="fas fa-home"></i> 返回首页
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 
