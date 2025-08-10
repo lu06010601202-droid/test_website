@@ -24,25 +24,44 @@
 #
 ###############################################################################
 
-from autobahn.util import public
 
-__all__ = (
-    'PayloadExceededError',
-)
+class FakeTransport(object):
+    _written = b""
+    _open = True
 
+    def __init__(self):
+        self._abort_calls = []
 
-@public
-class PayloadExceededError(RuntimeError):
-    """
-    Exception raised when the serialized and framed (eg WebSocket/RawSocket) WAMP payload
-    exceeds the transport message size limit.
-    """
+    def abortConnection(self, *args, **kw):
+        self._abort_calls.append((args, kw))
 
+    def write(self, msg):
+        if not self._open:
+            raise Exception("Can't write to a closed connection")
+        self._written = self._written + msg
 
-@public
-class Disconnected(RuntimeError):
-    """
-    Exception raised when trying to perform an operation which
-    requires a connection when the WebSocket/RawSocket is not
-    currently connected
-    """
+    def loseConnection(self):
+        self._open = False
+
+    def registerProducer(self, producer, streaming):
+        # https://twistedmatrix.com/documents/current/api/twisted.internet.interfaces.IConsumer.html
+        raise NotImplementedError
+
+    def unregisterProducer(self):
+        # do nothing is correct! until we fake implement registerProducer ..;)
+        pass
+
+    def getPeer(self):
+        # for Twisted, this would be an IAddress
+        class _FakePeer(object):
+            pass
+        return _FakePeer()
+
+    def getHost(self):
+        # for Twisted, this would be an IAddress
+        class _FakeHost(object):
+            pass
+        return _FakeHost()
+
+    def abort_called(self):
+        return len(self._abort_calls) > 0
